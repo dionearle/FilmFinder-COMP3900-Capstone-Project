@@ -1,0 +1,85 @@
+Week 1:
+
+During Week 1, I formed a group with other members in my class. We discussed which project we would work on for the term 
+and decided that we will work on the FilmFinder project. The scrum master was chosen, and the relevant collaboration tools 
+were set up such as Google Docs for the project proposal and Jira for documenting user stories and sprints. I worked on 
+the background information section for the project proposal. 
+
+Week 2:
+
+The focus of this week was to clarify the technologies that were going to be used in the project. It was agreed upon that 
+python would be used for the backend as most members are comfortable using this language. Furthermore, SQLite is to be used 
+for the database as some members including myself are familiar with this language. I mainly worked on developing user stories 
+for the project after analysing the project specification, and it was decided as a group that the user stories should be finalised
+by the end of the week in order to finish the project proposal on time. 
+
+Week 3: 
+
+Since the project proposal was due at the end of this week, the majority of my work was completing the incompleted sections of the proposal
+such as finalising the user stories, epics, sprint planning, and novel functionality. Much of this was done as a group
+as many decisions had to be made as a group. The technology stack to be used was also finalised in this week's lab which 
+was chosen to be the MEAN stack. Additionally, I spent some time getting familiar with the technologies that are to be used
+in the project including MongoDB, Express.js, and Node.js by viewing online tutorials. 
+
+Week 4: 
+
+During Week 4, the group began its first sprint by completing the user stories that were allocated to this sprint. The objective 
+was to get the basic website framework going as how to interact with the database containing the movies was still an issue that 
+needed resolving and the method undertaken setting up the database and interacting with it also needed to be clarified and finalised as 
+a group. I created a dummy dataset using MongoDB so our group has a small sample of movie data to use and experiemnt with. Additionally,
+I focused on completing the user stories in relation to search, with the back-end aspect yet to be completed once the database details
+are finalised. 
+
+Week 5: 
+
+I worked on making sure the search functionality was implemented in the front-end of our appplication so that it can be demonstrated
+in the progressive Demo this week. I had to make sure that the search string that the user was inputting in the search bar for 
+movies and director/genre was shown in the new route that the user was directed to (with the help of other team members as I had
+trouble implementing this due to unfamiliar syntax). Since the front-end was not integrated with the back-end, I worked on making 
+sure that the remaining user stories in relation to search for sprint 1 were completed so that I can start working on the second 
+sprint at the beginning of Week 6. The first progressive Demo was done this week, and our team completed the first retrospective as well. 
+
+Week 6:
+
+After the first progressive Demo was carried out, I helped make sure that the user stories that were not completed or fully functional 
+during the first sprint were completed before our group began work on the second sprint. I worked on ensuring that the search functionality
+worked for sprint one when searching by director or by a movie name. For sprint 2, I assigned myself the user stories to work on viewing 
+the wishlist of any user that has left a review for a given movie, and viewing the details of any director or cast member on the platform. 
+I worked on the front-end for the ban list funtionality of users, and also worked on setting up the front-end to display the wishlist of any 
+user given a user id for the reviews page.
+
+Week 7: 
+
+My focus this week was implementing the ability for users to view the profile of any other user when they are seeing all the reviews on the 
+review page for a movie. Additionally, I further worked on the front-end ban list funtionality of users as I encountered problems when testing the banlist
+of different users. After the lab meeting with my group members, I was able to start work on viewing the details of cast members and directors 
+when viewing them in the search results. The group decided that we should start work on the final report as well as the later weeks of the term are
+relatively busier. 
+
+Week 8: 
+
+For Week 8, my main contribution was ensuring that the error I was experiencing for viewing the details of cast members/directors who had left a review for 
+a movie would be resolved, and that all my respective user stories for sprint 2 were finished in time for progressive demo B. With the help of my team members, 
+I was able to complete all my user stories for sprint 2 on time for progressive Demo B, and I decided which user stories I would work on for 
+sprint 3 (director-cast related). The group also had a meeting to complete the second retrospective after the demo. I plan on contributing both to code development 
+in sprint 3 and the final project report in the coming weeks. 
+
+Week 9: 
+
+During Week 9, I focused on completing the user stories in sprint 3 that were related to directors and cast members as this was my focus in the second sprint. 
+I worked on calculating the average rating for a director/cast member given all of their associated movies, and also displaying the average rating for a director/cast 
+member in the movie details page. I also worked on reviews for directors and cast members, however I experienced some issues in getting it to work properly. I had to 
+collaborate with other members to ensure that the back-end functionality works for my user stories as well. 
+
+Week 10:
+
+For the final week of the project, I ensured that my user stories for sprint 3 were working correctly and as expected. I received a lot of help from my group members
+in order to make the reviews for directors/cast work correctly (especially for the back-end implementations). Additionally, I also managed to fix the issues 
+with displaying the average rating for a director/cast member correctly with the help of my team members. My user stories for sprint 3 were completed along with the
+rest of the user stories for sprint 3. I familiarised myself with all of the rest of the implemented features that other members worked on. I also assisted in preparing the project 
+report, mainly working on the technical details section and implementation challenges section. 
+ 
+
+
+
+

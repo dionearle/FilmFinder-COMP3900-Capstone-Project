@@ -1,0 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* Styling for wishlist items */
+
+.wishlist-item img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.wishlist-item * {
+    filter: grayscale(0%);
+    transition: 0.5s ease;
+    text-align: center;
+}
+
+.wishlist-item:hover * {
+    filter: grayscale(100%);
+    transition: 0.5s ease;
+}
+
+.wishlist-item:hover {
+    cursor: pointer;
+}
+
+.banlist-user:hover {
+    cursor: pointer;
+}
+
+
+/* Styling for star ratings */
+
+.rating-list li {
+    float: right;
+    color: #ddd;
+    margin: 0 5px;
+    margin-right: -4px;
+}
+
+.rating-list li:hover,
+.rating-list li:hover~li,
+.rating-list li.selected {
+    color: #ffd700;
+}
+
+.rating-list {
+    display: inline-block;
+    list-style: none;
+    margin: 0px 0px;
+}
+
+.showRatings li {
+    float: right;
+    color: #ddd;
+    margin: 0 5px;
+    margin-right: -4px;
+}
+
+.showRatings li.selected {
+    color: #ffd700;
+}
+
+.showRatings {
+    display: inline-block;
+    list-style: none;
+    margin: 0px 0px;
+}
+
+
+/* Styling for group results */
+
+.groupResults dd {
+    margin-left: 15px
+}
+
+
+/* Styling for heart icons */
+
+.heart-off {
+    fill: grey;
+    transition: 0.5s ease;
+}
+
+.heart-off:hover {
+    fill: red;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.heart-on {
+    fill: red;
+    transition: 0.5s ease;
+}
+
+.heart-on:hover {
+    cursor: pointer;
+}

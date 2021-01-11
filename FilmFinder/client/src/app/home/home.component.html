@@ -1,0 +1,60 @@
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to FilmFinder!</h1>
+    <p class="lead">Search for movies, read reviews, join groups and more.</p>
+    <hr class="my-4">
+    <div *ngIf="!auth.isLoggedIn()">
+        <p>To experience the full functionality of FilmFinder, create an account today.</p>
+        <a class="btn btn-primary btn-lg" routerLink="/register" role="button">Sign Up</a>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h5 class="card-title">Search for a Movie</h5>
+    </div>
+    <div class="card-body">
+        <form (submit)="searchTitle()">
+            <h5 class="card-title">By title:</h5>
+            <input type="text" id="title" name="title" [(ngModel)]="title" placeholder="Enter a movie title">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <br><br>
+        </form>
+        <form (submit)="searchDirector()">
+            <h5 class="card-title">By director:</h5>
+            <input type="text" id="director" name="director" [(ngModel)]="director" placeholder="Enter a director's name">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <br><br>
+        </form>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">By genre:</h5>
+        <div class="text-center">
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Comedy')">Comedy</button>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Action')">Action</button>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Drama')">Drama</button>
+            <br><br>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Fantasy')">Fantasy</button>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Horror')">Horror</button>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Mystery')">Mystery</button>
+            <br><br>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Romance')">Romance</button>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Thriller')">Thriller</button>
+            <button class="btn btn-danger btn-lg" (click)="searchGenre('Western')">Western</button>
+        </div>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h5 class="card-title">Search for a Group</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Search for a group to join and start chatting with other Film Finders
+        </h6>
+    </div>
+    <div class="card-body">
+        <form (submit)="searchGroup()">
+            <h5 class="card-title">Group:</h5>
+            <input type="text" id="name" name="name" [(ngModel)]="name" placeholder="What are you interested in?">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</div>

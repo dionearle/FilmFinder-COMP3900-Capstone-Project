@@ -1,0 +1,74 @@
+Sarah Williams, z5205420
+Wk 1
+Formed team with other class members and chose the FilmFinders project.
+Team roles were chosen and I set up the Google Docs folder for the team and the Jira
+boards were set up.
+Begun working on the proposal. I added information on the background section
+
+Wk 2
+In weekly lab the group focused on deciding what technologies to use. Ready for 
+meeting on Monday we will have researched our potential options in order to make a 
+decision on it.
+I have been continuing to work on the proposal, including editing the background section
+and setting up how objectives and functionality relates to the user stories
+
+Wk 3
+Met with the group on Monday to plan out more of the proposal. In the lab on Thursday
+we chose to work using a MEAN stack, so I spent time researching this.
+Primarily I worked on the storyboards and flow charts (designed them and the rest of
+the group edited it after to check it complied with our desired webpage).
+Alo worked on the proposal, editing different sections. 
+
+Wk 4
+Met with group on Monday and Thursay. We made a rough plan of how to approach the first
+sprint which is to be completed week 5 wed. 
+For the first half of the week I mostly found resources on using MEAN stack so I could get
+an idea of how the project would run.
+Then I worked on US 3-> browsing by director and genre.So far I have mostly worked on
+the front end of this user story. 
+
+Wk 5
+Met with group on Monday and Thursday. This week I implemented the front end of the
+genre browsing functionality in the first half of the week. After the progressive demo
+on Thursday, I connected the front and backend of this functionality. I also implemented
+the functionality where users could click on the title of a result from a search and be
+directed to the details page of that movie. 
+From the retrospectie we completed after the progresive demo, I am responsible for 
+ensuring that as group members we communicate more frequently to let each other know
+what we are working on. 
+
+Wk 6
+This week, as a team we started on Sprint 2. We met on Monday to plan out the 
+user stories to be completed. I begun work on the user stories relating to 
+writing and viewing reviews of movies. I used the work Xin completed on the backend
+for writing and getting reviews and linked this into the front end. I also met 
+with Xin and Rohail and Thursday and we chatted through some problems we were having
+and made plans of how we would continue working on sprint 2. 
+
+Wk 7
+Met with the group on Monday where we merged all new code and also updated each other
+on our progress. This week I converted the numerical ratings in the front end 
+to star ratings. Star ratings where then also displayed for all previously written
+ratings and the average for each movie. In the meeting on Thursday we again updated
+each other on our progress and cleared up what had to be done for the rest of sprint 2.
+I created the document for the final report and begun working on it by making a plan/
+outline for the report. 
+
+Wk 8
+This week as a group we completed sprint 2. We met on Wednesday to merge all of sprint 
+2's code together. On Thursday we discussed sprint 3 during our lab time and set up
+the jira board for it. We also had our progressive demo that went well and completed
+our retrospective after the lab at 1.30. I have been allocated the responsibility
+of keep track of any bugs in the code during sprint 3. Personally, I spent the first half
+of the week working extensively on the report completing the introduction and working
+on the sections on the design of the system and functionalities. For sprint 3 I have
+been working on implementing functionality relating to groups. I worked on creating, 
+searching, joining and leaving groups, implementing this in both the front and backend. 
+
+Wk 9
+Met with the team on Monday to discuss how this final week would work. I decided to add an 
+extra functionality, displaying all reviews written by the registered user on their profile.
+This was not a user story but was set up on our story boards. I also helped other team members
+with the front end for writing reviews for a director/cast as this is what I worked on in sprint 2.
+Continued working on the report, now writing up the sections on licensing and functionality.
+Met with the grou on Sunday morning to merge our code and discuss the final parts still to do. 

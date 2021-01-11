@@ -1,0 +1,118 @@
+<div *ngIf="addMovieStatus == 'fail'" class="alert alert-danger text-center" role="alert">
+    Could not add movie! Please try again.
+</div>
+<div *ngIf="addMovieStatus == 'success'" class="alert alert-info text-center" role="alert">
+    Movie added! Redirecting to home page...
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h5 class="card-title">Add movie</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Enter the details for a movie to add to the FilmFinder database.</h6>
+    </div>
+    <div class="card-body">
+        <form (submit)="addMovie()">
+            <div class="form-group row">
+                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{movieDetails.title == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="title" placeholder="Enter title" [(ngModel)]="movieDetails.title">
+                    <div class="invalid-feedback">
+                        Please enter the movie's title.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="plot" class="col-sm-2 col-form-label">Plot</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{movieDetails.plot == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="plot" placeholder="Enter plot" [(ngModel)]="movieDetails.plot">
+                    <div class="invalid-feedback">
+                        Please enter an overview of the movie's plot.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="released" class="col-sm-2 col-form-label">Release Date</label>
+                <div class="col-sm-10">
+                    <input type="date" class="{{movieDetails.released == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="released" placeholder="Enter release date" [(ngModel)]="movieDetails.released">
+                    <div class="invalid-feedback">
+                        Please enter the release date of the movie.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="genres" class="col-sm-2 col-form-label">Genres</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{movieDetails.genres == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="genres" placeholder="Enter genres (comma-separated)" [(ngModel)]="movieDetails.genres">
+                    <div class="invalid-feedback">
+                        Please enter genre(s) for the movie.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="directors" class="col-sm-2 col-form-label">Director(s)</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{movieDetails.directors == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="directors" placeholder="Enter directors (comma-separated)" [(ngModel)]="movieDetails.directors">
+                    <div class="invalid-feedback">
+                        Please enter director(s) for the movie.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="cast" class="col-sm-2 col-form-label">Cast</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{movieDetails.cast == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="cast" placeholder="Enter cast members (comma-separated)" [(ngModel)]="movieDetails.cast">
+                    <div class="invalid-feedback">
+                        Please enter the cast of the movie.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="runtime" class="col-sm-2 col-form-label">Runtime</label>
+                <div class="col-sm-10">
+                    <input type="number" class="{{movieDetails.runtime == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="runtime" placeholder="Enter runtime (in minutes)" [(ngModel)]="movieDetails.runtime">
+                    <div class="invalid-feedback">
+                        Please enter the runtime of the movie.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="poster" class="col-sm-2 col-form-label">Poster</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{movieDetails.poster == '' ? 'form-control is-invalid' : 'form-control is-valid'}}" name="poster" placeholder="Enter poster link" [(ngModel)]="movieDetails.poster">
+                    <div class="invalid-feedback">
+                        Please enter a link to a poster for the movie.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add movie</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

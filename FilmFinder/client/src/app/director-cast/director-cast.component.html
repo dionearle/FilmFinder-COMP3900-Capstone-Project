@@ -1,0 +1,121 @@
+<div class="card m-5">
+    <div class="card-header">
+        <h5 class="card-title">{{name}} ({{role}}) </h5>
+    </div>
+    <div *ngIf="loaded" class="card-body">
+        <h4>Average Rating</h4>
+        <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+            <li *ngIf="loaded" [ngClass]="{'selected': (star <= averageRating)}">
+                <em class="fa fa-star"></em>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="auth.isLoggedIn()" class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">Share {{name}} to a Group</h4>
+    </div>
+    <div class="card-body">
+        <form #shareForm="ngForm" (submit)="share(shareForm)">
+            <label for="group">Select a group:</label>
+            <select id="group" name="group" [(ngModel)]="shareSelectedGroup">
+                <option *ngFor="let group of joinedGroups" value={{group._id}}>{{group.name}} </option>
+            </select>
+            <div class="form-group">
+                <label for="content" class="col-sm-4 col-form-label">Text:</label>
+                <div class="col-lg-10">
+                    <input type="text" name="content" size="50" maxlength="250" placeHolder="Give your thoughts" [(ngModel)]="shareContent">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Share</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">Write a Review for {{name}}</h4>
+    </div>
+    <div class="card-body">
+        <form #reviewForm="ngForm" (submit)="submitRating(reviewForm)">
+            <label for="favMovie">Which movie is your favourite?</label>
+            <select id="movies" name="movies" class="{{currentRating.favouriteMovie}}" [(ngModel)]="currentRating.favouriteMovie">
+                <option *ngFor="let movie of associatedMovies" value={{movie.id}}>{{movie.title}} </option>
+            </select>
+            <div class="form-group">
+                <label for="content" class="col-sm-4 col-form-label">Text:</label>
+                <div class="col-lg-10">
+                    <input type="text" class="{{currentRating.content}}" name="content" size="50" maxlength="250" placeHolder="Give your thoughts" [(ngModel)]="currentRating.content">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="{{auth.isLoggedIn() ? 'btn btn-primary' : 'btn btn-danger'}}">{{postReviewText}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">All Reviews for {{name}}</h4>
+    </div>
+    <div class="card-body">
+        <ul class="usersReviews" *ngFor='let review of allReviews'>
+            <div class="card border-secondary mb-3" style="max-width: 36rem;">
+                <div class="card-header">
+                    <p class="card-text text-secondary" style="display:inline">Review by</p>
+                    <p class="card-text" style="display:inline" role="button" (click)="getUser(review.author)">
+                        {{review.UserName}}</p>
+                    <button *ngIf="auth.isLoggedIn() && auth.getUserDetails().type == 'admin'" type="button" class="btn btn-outline-danger btn-sm" (click)="deleteReview(review._id)">Delete Review</button>
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">{{review.content}}</p>
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">{{review.UserName}}'s favourite {{name}} movie:</div>
+                        <div class="card-body">
+                            <div class="wishlist-item" (click)="visitShareItem(review)">
+                                <img src="{{review.moviePoster}}" height="200" alt="poster">
+                                <p role="button">{{review.movieTitle}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <h5>Share:</h5>
+                    <form #shareReviewForm="ngForm" (submit)="shareReview(review._id, shareReviewForm)">
+                        <div class="form-group">
+                            <label for="group">Select a group:</label>
+                            <select id="shareReviewGroup" name="shareReviewGroup" ngModel>
+                                <option *ngFor="let group of joinedGroups" value={{group._id}}>{{group.name}} </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Text:</label>
+                            <input type="text" id="shareReviewText" name="shareReviewText" size="50" maxlength="250" placeHolder="Give your thoughts" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Share</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+
+<div class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">Associated Movies</h4>
+    </div>
+    <div class="card-body text-center" id="associatedMovies"></div>
+</div>

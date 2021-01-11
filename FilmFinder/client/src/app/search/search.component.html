@@ -1,0 +1,28 @@
+<div class="card m-5">
+    <div class="card-header">
+        <h3 class="card-title">You searched for a movie!</h3>
+        <h5 class="card-title">Showing results for: {{title}} {{director}} {{genre}} </h5>
+    </div>
+    <div class="card-body">
+        <ul *ngFor="let result of results">
+            <div class="row">
+                <div class="col-4">
+                    <img height=200 src="{{result.poster == undefined ? '../assets/noposter.jpg' : result.poster }}" alt='' />
+                </div>
+                <div class="col-8">
+                    <button class="btn btn-link" role="button" (click)="details(result._id, result.title)">{{result.title}}</button>
+                    <br>
+                    <a>Latest Average Rating:</a>
+                    <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+                        <li [ngClass]="{'selected': (star <= result.latest_average_rating)}">
+                            <em class="fa fa-star"></em>
+                        </li>
+                    </ul>
+                    <br>
+                    <a>Plot: {{result.plot}}</a>
+                </div>
+            </div>
+            <br>
+        </ul>
+    </div>
+</div>

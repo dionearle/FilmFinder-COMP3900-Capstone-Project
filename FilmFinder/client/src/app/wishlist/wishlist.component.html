@@ -1,0 +1,7 @@
+<ul class="list-group m-5">
+    <li class="list-group-item active text-center">Displaying details for {{ details?.name }}</li>
+    <button *ngIf="auth.isLoggedIn()" type="button" class="{{inBanlist ? 'btn btn-outline-danger btn-sm' : 'btn btn-outline-success btn-sm'}}" (click)="banlist()">{{banlistText}}</button>
+    <li class="list-group-item text-center">Username: {{ details?.name }}</li>
+    <li class="list-group-item text-center">Email: {{ details?.email }}</li>
+    <li class="list-group-item text-center" id="wishlist">Wishlist:</li>
+</ul>

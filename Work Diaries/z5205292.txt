@@ -1,0 +1,107 @@
+Dion Earle (z5205292) Work Diary
+
+Week 1
+
+To get started, we formed our group and exchanged details so we can communicate outside of tutorials.
+We also scheduled a weekly meeting. We then decided as a group we would create the FilmFinder project.
+In our first tutorial, we setup our Jira accounts and created a template for our project proposal. For
+the proposal, I researched several technologies/languages we could use to construct our web app,
+comparing the positives and negatives of each potential option.
+
+Week 2
+
+This week we setup our github classroom repository and continued working on the project proposal.
+Whilst we managed to narrow down the technologies suitable to construct our web app, I believed we
+needed further research before making a final decision, so we planned to discuss this next week. After
+our user stories were extracted from the project objectives, I also created several novel user stories
+that weren't included in the project specification, which involved research and reflection of which
+features a user may desire/expect from our site. For next week, we plan to finalise all user stories,
+setup our sprints and create storyboards.
+
+Week 3
+
+To start the week, we had a meeting on Monday to discuss what still needed to be completed in our
+proposal. In the tutorial, we finalised the technologies to be used for our web app, and I described
+all of these in the proposal. For many sections of the proposal the team worked collaboratively, as
+this ensured everyone was on the same page and all opinions were fairly considered. Individually, I
+worked on creating user stories for some novel functionality and adding these to the product backlog,
+creating the system architecture diagram, and overall formatting and editing of many other sections.
+Finally, I did some further research on creating a MEAN web app, and I setup all the files and
+technologies so everyone would be ready to start working on the project next week.
+
+Week 4
+
+Having submitted our project proposal, we had a meeting on Monday to discuss who would be allocated
+what user stories for the first sprint. I was assigned to work on the signup, login, logout, and
+profile functionality, as these were all closely related. Before doing so, I spent a lot of time doing
+tutorials and researching the technology we would use, and used this knowledge to setup our site's
+entire framework that we would all use. In our Thursday meeting, I explained in depth how our system
+is structured and the process for expanding on this with our own code. At the end of the week, I had
+mostly implemented my assigned user stories, yet there were a few smaller issues with signup that I
+would resolve next week.
+
+Week 5
+
+We had a meeting on Monday to determine what work was to be completed before our progressive demo on
+Thursday. For my assigned user stories, I resolved the outstanding issues with signup so a user could
+not leave any fields blank or use an email associated with an existing account, alongside making some
+frontend aesthetic changes. I also setup MongoDB Atlas for our project, so we had a shared cloud
+database. Then, I spent the rest of the week helping others with any issues they were facing, which
+included re-implementing the search functionality so a user's search terms were actually passed as
+parameters to the route, and connecting the front-end search functionality to the backend database so
+that search queries would fetch and display results. Finally, we had our progressive demo for sprint
+1, and held a retrospective meeting afterwards in which we discussed the positives alongside
+improvements to make for future sprints.
+
+Week 6
+
+Since we hadn't completed all of our user stories for the first sprint, our priority was to complete
+these before our next meeting on Monday. For me this involved fixing the search functionality so it
+only searches for the keyword in the required field, refactoring large parts of the code to reduce
+redundancy and improve readability, and updating the API so it fetches movies by id rather than title.
+Having done all this, on Monday we assigned ourselves user stories for the current sprint. Throughout
+this week, I implemented a wishlist for users, where they can add or remove a movie from their
+wishlist. This also involved implementing the frontend aspects, including display a user's wishlist
+on their profile page with each item linking to that movie's page. Alongside this, I added an admin
+user type, alongside allowing them to delete any movie they find on the site and giving them a way to
+add a movie to the site. Our next meeting is on Monday, where we will discuss our progress for the
+current sprint.
+
+Week 7
+
+This week we continued working on our assigned user stories for the second sprint. For me, the major
+parts I worked on included fully implementing the average ratings for movies into the frontend,
+implementing features for the banlist functionality such as adding, removing and viewing users in
+your banlist, only showing reviews from users not in your banlist, and allowing admin users to delete
+a review for a movie. Alongside this, I also worked on fixing any ongoing issues with either my own
+or other people's code, including refactoring the backend review functions so they use the ID of a
+movie rather than the title, displaying reviews in descending order of when they were created, and
+allowing non logged in users to view the reviews for a movie. Finally, as a group we decided to begin
+work on the final report so it isn't rushed closer to the due date.
+
+Week 8
+
+This was our final week for the second sprint, in which we were making good progress on our user
+stories. The final outstanding user stories that had not yet been picked up by anyone was a movie
+recommendation system, so I decided I would attempt to implement this. I managed to do so, with it
+being based on the movie's average rating, genres, cast and directors. Alongside this, I helped others
+to ensure they also finished their user stories, which included displaying associated movies on the
+director/cast details page, removing duplicate movies from these results, and ensuring that clicking
+a genre on the movie details page links to that genre's search page. I also updated the UI for
+several pages to make it more standardised, and ensured the average rating displayed for movies used
+the star system implemented by Sarah. Having completed all of the user stories for this sprint, we
+presented our work in the progressive demo, and shortly after held our retrospective. We also briefly
+discussed how we would split the work for the final sprint and assigned user stories so we could
+get started on this.
+
+Week 9
+
+In our final week, the sprint focused on all of the novel functionalities we defined in the user
+stories, being director/cast ratings and groups. I assigned myself eight of the user stories
+associated with groups, and spent a majority of the week working on this. We also collaboratively
+worked on different aspects of the report to ensure it was completed in time. Since there was lots
+of work to be completed, we had several meetings throughout the week to continually check each
+others progress and get help/advice if required. Once I had completed my assigned user stories, I
+spent the last couple days fixing errors that could either not be fixed previously, had not been
+found before, or were a result of merging different branches. After doing so, both our project and
+report were ready to submit for their deadline.

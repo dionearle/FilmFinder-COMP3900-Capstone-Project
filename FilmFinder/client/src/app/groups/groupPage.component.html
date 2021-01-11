@@ -1,0 +1,141 @@
+<div class="card m-5">
+    <div *ngIf="loaded" class="card-header">
+        <h2 class="card-title">{{groupInformation.name}}</h2>
+        <p>{{groupInformation.description}}</p>
+        <button *ngIf="auth.isLoggedIn() && !isCreator()" type="button" class="{{inGroup ? 'btn btn-outline-danger btn-sm' : 'btn btn-outline-success btn-sm'}}" (click)="join()">{{joinGroupText}}</button>
+    </div>
+    <div *ngIf="inGroup" class="card-body">
+        <h4>Members:</h4>
+        <div class="row">
+            <ul *ngFor="let member of groupMembers">
+                <button class="btn btn-link" role="button" (click)="getUser(member.id)">{{member.name}}</button>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="auth.isLoggedIn() && inGroup" class="card m-5">
+    <div class="card-header">
+        <h4 *ngIf="loaded" class="card-title">Create a post in {{groupInformation.name}}</h4>
+    </div>
+    <div class="card-body">
+        <form #postForm="ngForm" (submit)="createPost()">
+            <div class="form-group">
+                <label for="content" class="col-sm-4 col-form-label">Text:</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="content" placeholder="Start writing your post" [(ngModel)]="postContent">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="auth.isLoggedIn() && inGroup" class="card m-5">
+    <div class="card-header">
+        <h4 *ngIf="loaded" class="card-title">Recent posts in {{groupInformation.name}}</h4>
+    </div>
+    <div class="card-body">
+        <ul *ngFor="let post of groupPosts">
+            <div class="card border-secondary mb-3" style="max-width: 36rem;">
+                <div class="card-header">
+                    <p class="card-text text-secondary" style="display:inline">Post by</p>
+                    <p class="card-text" style="display:inline" role="button" (click)="getUser(post.author)">
+                        {{post.authorName}}</p>
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">{{post.text_content}}</p>
+                    <div *ngIf="post.share_type != null" class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">{{post.authorName}} shared a {{post.displayShare}}:</div>
+                        <div class="card-body">
+                            <div *ngIf="post.share_type == 'movie'">
+                                <div class="wishlist-item" (click)="visitShareItem(post)">
+                                    <img src="{{post.moviePoster}}" height="200" alt="poster">
+                                    <p role="button">{{post.movieTitle}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="post.share_type == 'review' && post.reviewType == 'movie'">
+                                <div class="wishlist-item" (click)="visitShareItem(post)">
+                                    <img src="{{post.moviePoster}}" height="200" alt="poster">
+                                    <p role="button">{{post.movieTitle}}</p>
+                                </div>
+                                <p class="card-text" style="display:inline">Review by</p>
+                                <p role="button" style="display:inline" (click)="getUser(post.reviewAuthor)">
+                                    {{post.reviewUserName}}</p>
+                                <div>
+                                    <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+                                        <li [ngClass]="{'selected': (star <= post.reviewRating)}">
+                                            <em class="fa fa-star"></em>
+                                        </li>
+                                    </ul>
+                                    <p>{{post.reviewText}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="post.share_type == 'review' && post.reviewType == 'actor'">
+                                <h5 class="card-text" style="display:inline">{{post.reviewActorName}}</h5>
+                                <br>
+                                <p class="card-text" style="display:inline">Review by</p>
+                                <p role="button" style="display:inline" (click)="getUser(post.reviewAuthor)">
+                                    {{post.reviewUserName}}</p>
+                                <p>{{post.reviewText}}</p>
+                                <div class="wishlist-item" (click)="visitShareItem(post)">
+                                    <img src="{{post.moviePoster}}" height="200" alt="poster">
+                                    <p role="button">Favourite movie: {{post.movieTitle}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="post.share_type == 'actor'">
+                                <p role="button" (click)="visitShareItem(post)">{{post.actorName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="{{post.liked == 'Unlike' ? 'heart-on' : 'heart-off'}}" (click)="likeUnlikePost(post)">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                        </svg>
+                        <a>{{post.reactList.length}} likes</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <form #replyForm="ngForm" (ngSubmit)="replyPost(post, replyForm)">
+                        <div class="form-group">
+                            <label for="replyContent" class="col-sm-4 col-form-label">Reply:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="replyContent" id="replyContent" placeholder="Reply to this post" ngModel>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Reply</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div *ngIf="post.replies != undefined" class="card-footer">
+                        <ul *ngFor="let reply of post.replies">
+                            <div class="card border-secondary mb-3" style="max-width: 36rem;">
+                                <div class="card-header">
+                                    <p class="card-text text-secondary" style="display:inline">Reply by</p>
+                                    <p class="card-text" style="display:inline" role="button" (click)="getUser(reply.author)">{{reply.authorName}}</p>
+                                </div>
+                                <div class="card-body text-secondary">
+                                    <p class="card-text">{{reply.text_content}}</p>
+                                    <div class="{{reply.liked == 'Unlike' ? 'heart-on' : 'heart-off'}}" (click)="likeUnlikePost(reply)">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                        </svg>
+                                        <a>{{reply.reactList.length}} likes</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+Work Diary of z5205954
+
+#Week 1
+- We formed the group prior to the session and made a group chat to communicate to each other prior to the tutorial. I made the Jira accounts and set up Github. 
+- During the tutorial I nominated myself as the Scrum Master.
+
+#Week 2
+- I discussed with the team as to what technologies we used (Python for backend between Flask and Django, SQLite for dbms).
+- Organised a meeting on Sunday, 9 AM, participated in it to help set out fixed goals to finalise the proposal. 
+- I organised the permissions in the user stories, wrote a few user stories, contributed to writing some of the background research of the proposal.
+
+#Week 3
+- I helped the team finalise our technology decision on the MEAN stack, with js, Angular.js etc (as listed on the proposal).
+- Organised another meeting on Sunday, 9 AM. Participated in both the tutorial and the self assigned meeting to reach the goal of submitting the proposal on Sunday.
+- Made the flow charts with Sarah's help on the document, wrote most of the epic user stories, finalised the number of sprints and made the first sprint.
+- Got some more familiar with MEAN stack technologies.
+- Finalised, edited and converted the proposal into .pdf to submit as Scrum Master of the project.
+
+#Week 4
+- I had a preoperative surgery on Tuesday that I had to fast on Monday for, and recovered for two days afterwards. Backlogged work kept me busy for the weekdays.
+- I updated the documentation for the project to describe how the website can be run, as well as documenting what each section was for. I did this during the Thursday tutorial while we were discussing with each other how the project worked.
+- Wrote to-do lists, updated the Jira.
+- Led the team meeting on Sunday to see what we needed to get done. 
+
+#Week 5
+- The sprint ended on Thursday this week. I presented the team's work during the demo and wrote up the Retrospective A and demo documents, the former which was sent to the tutor.
+- I read through everyone's code as scrum master, corrected what needed to be corrected and merged everything together. I did all the merge conflicts collaboratively with the team with share screens.
+- After Retro A, I talked to the team and organised Sprint 2 to mirror the proposal. I set up the sprint on Jira and customised it to demand.
+- Joined another team meeting on Sunday to discuss how the Sprint 2 would go, since Sprint 1 wasn't totally finished.
+
+#Week 6 [Flex Week]
+- I had the proper surgery that my preop was for on W3 here in W6. Out of action for 5 days. I decided to take more of a supporting role that aligned with my scrum master role, auditing code and merging features while seeing what wasn't completed.
+
+#Week 7
+- Made sure Retro A was also sent to give instead of just to tutor to align with the spec.
+- Led briefly the team meeting on Monday, merged all the branches and resolved a few bugs with the team. Updated the Jira, alongside priority checks and such to make sure the Sprint 2 went well.
+- Reviewed submitted code on the different branches, updated all the branches so that redundant ones were removed, started some work on the report as per Retro A recommendations.
+- Surgery + Special Consideration period started on Saturday, 31/10 for 14 days (I think)
+
+#Week 8
+- Bedridden since Saturday, resumed work on Wednesday with limited functioning.
+- Merged and maintained all the branches for Sprint 2, closed the Sprint 2 and made a report. Opened Sprint 3 and finalised what's left to do until project completion. Resolved bugs.
+- Continually started and updated the report as per my recommendations and obligations during Retrospective A.
+- Wrote Retro B and demo plans and did the presentation on Thursday. Ran merge again.
+- Wrote implementations and functionality in the report.
+
+#Week 9
+- Merged again on Monday. Resolved a bunch of bugs.
+- Mainly worked on the report while reading everyone's code, and maintaining the branches. I wrote substantial portions of the Overview, helped set up the document with a lot of formatting with Sarah, wrote the entire User Manual and substantial portions of the third party licensing areas and functionalities. Wrote the conclusion.
+- Edited everyone's contributions to the report to make it cohesive.
+- Prepared presentation material for the final demo.
+- Worked on a few frontend layers, led the merge as Scrum Master on Thursday and Sunday.
+
+#Week 10
+- Writing material to use for the final demo.
+- Led the merge and resolved bugs, closed Sprint 3.
+- Wrote substiantial amounts of report and made sure everything aligned with licensing, distribution concerns, etc.
+- Finalised and submitted the report, project as per my role as Scrum Master.

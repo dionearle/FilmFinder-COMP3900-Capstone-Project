@@ -1,0 +1,31 @@
+<div *ngIf="!createStatus" class="alert alert-danger text-center" role="alert">
+    Group name already taken! Please try again.
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h5 class="card-title">Create a Group</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Make a group to be able to chat with other users</h6>
+    </div>
+    <div class="card-body">
+        <form #groupForm="ngForm" (submit)="create(groupForm)">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Group Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{currentGroup.name}}" name="name" placeHolder="Enter a name for your group" [(ngModel)]="currentGroup.name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label">Group Description</label>
+                <div class="col-sm-10">
+                    <input type="text" class="{{currentGroup.description}}" name="description" placeHolder="What is your group about?" maxlength="250" size="50" [(ngModel)]="currentGroup.description">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Create Group</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

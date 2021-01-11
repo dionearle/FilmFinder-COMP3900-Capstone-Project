@@ -1,0 +1,169 @@
+<div *ngIf="deletedMovie" class="alert alert-info text-center" role="alert">
+    Movie removed! Redirecting to homepage...
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-4">
+                <img *ngIf="loaded" height=200 src="{{movieInfo.poster == undefined ? '../assets/noposter.jpg' : movieInfo.poster }}" alt='' />
+            </div>
+            <div class="col-8">
+                <h2 class="card-title">{{this.movieTitle}}</h2>
+                <button *ngIf="auth.isLoggedIn()" type="button" class="{{inWishlist ? 'btn btn-outline-danger btn-sm' : 'btn btn-outline-success btn-sm'}}" (click)="wishlist()">{{wishlistText}}</button>
+                <button *ngIf="auth.isLoggedIn() && auth.getUserDetails().type == 'admin'" type="button" class="btn btn-outline-danger btn-sm" (click)="deleteMovie()">Delete Movie</button>
+                <br>
+                <a>Latest Average Rating:</a>
+                <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+                    <li *ngIf="loaded" [ngClass]="{'selected': (star <= movieInfo.latest_average_rating)}">
+                        <em class="fa fa-star"></em>
+                    </li>
+                </ul>
+                <br>
+                <a *ngIf="loaded">Plot: {{movieInfo.plot}}</a>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="loaded" class="card-body">
+        <h4>Genre(s):</h4>
+        <div class="row">
+            <ul *ngFor="let genre of genres">
+                <div class="col"><button class="btn btn-link" role="button" (click)="searchGenre(genre)">{{genre}}</button> </div>
+            </ul>
+        </div>
+        <h4>Cast:</h4>
+        <div class="row">
+            <ul *ngFor="let cast of CastArray">
+                <div class="col">
+                    <button class="btn btn-link" role="button" (click)="details(cast.name, 'Cast Member', 'cast')">{{cast.name}}</button>
+                    <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+                        <li *ngIf="loaded" [ngClass]="{'selected': (star <= cast.rating)}">
+                            <em class="fa fa-star"></em>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+        <h4>Director(s):</h4>
+        <div class="row">
+            <ul *ngFor="let director of DirectorsArray">
+                <div class="col">
+                    <button class="btn btn-link" role="button" (click)="details(director.name, 'Director', 'director')">{{director.name}}</button>
+                    <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+                        <li *ngIf="loaded" [ngClass]="{'selected': (star <= director.rating)}">
+                            <em class="fa fa-star"></em>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">Write a Review for {{this.title}}</h4>
+    </div>
+    <div class="card-body">
+        <form #reviewForm="ngForm" (submit)="submitRating(reviewForm)">
+            <label for="content" class="col-sm-4 col-form-label">Rating:</label>
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
+                        <li (click)="recordStars(star)" (mouseenter)="tmpStars = star" (mouseleave)="tmpStars = 0" [ngClass]="{'selected': (star <= currentRating.rating) || (star <= tmpStars)}">
+                            <em class="fa fa-star"></em>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content" class="col-sm-4 col-form-label">Text:</label>
+                <div class="col-lg-10">
+                    <input type="text" class="{{currentRating.content}}" name="content" size="50" maxlength="250" placeHolder="Give your thoughts" [(ngModel)]="currentRating.content">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="{{auth.isLoggedIn() ? 'btn btn-primary' : 'btn btn-danger'}}">{{postReviewText}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="auth.isLoggedIn()" class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">Share {{this.title}} to a Group</h4>
+    </div>
+    <div class="card-body">
+        <form #shareForm="ngForm" (submit)="share(shareForm)">
+            <label for="group">Select a group:</label>
+            <select id="group" name="group" [(ngModel)]="shareSelectedGroup">
+                <option *ngFor="let group of joinedGroups" value={{group._id}}>{{group.name}} </option>
+            </select>
+            <div class="form-group">
+                <label for="content" class="col-sm-4 col-form-label">Text:</label>
+                <div class="col-lg-10">
+                    <input type="text" name="content" size="50" maxlength="250" placeHolder="Give your thoughts" [(ngModel)]="shareContent">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Share</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">All Reviews for {{this.title}}</h4>
+    </div>
+    <div class="card-body">
+        <ul class="usersReviews" *ngFor='let review of allReviews'>
+            <div class="card border-secondary mb-3" style="max-width: 36rem;">
+                <div class="card-header">
+                    <p class="card-text text-secondary" style="display:inline">Review by</p>
+                    <p class="card-text" style="display:inline" role="button" (click)="getUser(review.author)">{{review.UserName}}</p>
+                    <button *ngIf="auth.isLoggedIn() && auth.getUserDetails().type == 'admin'" type="button" class="btn btn-outline-danger btn-sm" (click)="deleteReview(review._id)">Delete Review</button>
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text" *ngIf="checkContent(review.content)">{{review.content}}</p>
+                    <ul class="list-inline showRatings" *ngFor="let star of stars" style="display: inline-block">
+                        <li [ngClass]="{'selected': (star <= review.rating)}">
+                            <em class="fa fa-star"></em>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <h5>Share:</h5>
+                    <form #shareReviewForm="ngForm" (submit)="shareReview(review._id, shareReviewForm)">
+                        <div class="form-group">
+                            <label for="group">Select a group:</label>
+                            <select id="shareReviewGroup" name="shareReviewGroup" ngModel>
+                                <option *ngFor="let group of joinedGroups" value={{group._id}}>{{group.name}} </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Text:</label>
+                            <input type="text" id="shareReviewText" name="shareReviewText" size="50" maxlength="250" placeHolder="Give your thoughts" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Share</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h4 class="card-title">Recommendations</h4>
+    </div>
+    <div class="card-body text-center" id="recommendations"></div>
+</div>

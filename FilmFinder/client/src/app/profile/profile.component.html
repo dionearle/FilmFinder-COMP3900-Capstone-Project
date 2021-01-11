@@ -1,0 +1,15 @@
+<ul class="list-group m-5">
+    <li class="list-group-item active text-center">Your profile</li>
+    <li class="list-group-item text-center">Username: {{ details?.name }}</li>
+    <li class="list-group-item text-center">Email: {{ details?.email }}</li>
+    <li class="list-group-item text-center">Groups:
+        <div class="row">
+            <ul *ngFor="let group of joinedGroups">
+                <div class="col"><button class="btn btn-link" role="button" (click)="viewGroup(group.name)">{{group.name}}</button> </div>
+            </ul>
+        </div>
+    </li>
+    <li class="list-group-item text-center" id="wishlist">Wishlist:</li>
+    <li class="list-group-item text-center" id="banlist">Banlist:</li>
+    <li class="list-group-item text-center" id="allReviews">Movies you've Reviewed:</li>
+</ul>

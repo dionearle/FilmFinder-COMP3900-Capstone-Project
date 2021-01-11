@@ -1,0 +1,38 @@
+Week 1:
+We decide the FilmFinder as our group porject. And Wisley become the scrum master for out team. 
+Before the next week, we will working in the user story and background for the project Proposal.
+
+Week 2:
+During the tutorial we decide to use python as backend lanuage. Sone team memeber has done the database course, and recommad the SQLite as the database for this project.   
+The background and user story is half way to finish now. We decide the meet at Monday to finalize Sprints and Technical depth.
+
+Week 3:
+We have decide the framework for this porject which is MEAN stack. The tutor give some advice about the novel function which indicate the original one is not "novel enough".
+So the main task for this week is to modiy the novel function and corresponding user story. Sarah has done the story board and flow diagram. I add some detail to the 
+layer architecture diagram and corresponding description. After we finalize the Proposal, team decide to meet at Monday to discuss the implementation of the first Sprint.
+
+week 4:
+We submit our project Proposal this in last Sunday. Gourp has meet on Monday to discuss the workload in the first sprint. I did not do much work on the project this week. Most of my time during the week day is allocated to the presentation in ethical course.
+I underestimate the complexcity of MEAN stack. I spend the weekend to watch the tutorial and try to understand the MEAN stack. Hope I could catch soon. I was assigned the movie detial user story.
+During the following week, I need to allocate more time and effort to understand the MEAN stack.
+
+week 5:
+We have a group meeting on Monday to check our porcess to allocated user story. We finalize our group representation content in the Wednesday afternoon. I did not finish my user story at timne. Our gourp spend majority of time to learn the MEAN stack during the first sprint.
+We have the Retrospective just after the tutorial. In order to increase efficiency in second sprint. We decide to allocated front end end coding and back end coding separately. I will od the backend part. And Dion will do both part(he is more familiar with javaScrip coding). And the rest of group memeber do the front end part.
+If I finsihed the back end part, I will joine  the front end coding.
+
+Week 6:
+We start the second sprint this week. We finishe all user story in first sprint at week 5 weekend. Majority of project will be finished in this sprint. I implement the review api, ban list api, rating system ,and rancking logic in this week.
+Sarah is working on the review part in front end. Dion finishe the wishlist part. Becase we are useing the movie data from IBMD, we need to create the new actor and director database base on those movie Data. I plan to finish that in week 7.
+ 
+
+week 7:
+Upon Thursday, the majority of the sprint 2 has been finished in this week. I have implmented the actor database initialization, the banlist and review system in the back end. we decide to start working in the final report becase week 10 would be busy.
+
+Week 8:
+We start the final sprint in this week. Every user story in this sprint is relate to the noval functionality which is the rating system for the actor and group for user to discuss the movie.
+I am working on the message part of group and review part for the actor. We decide to have a meeting on Monday next week so we can merge our code and connect the front end and back end.
+
+Week 9:
+During the meet in the Monday, I have confirmed the formate of the message we are going ot implemnet, Rohail infored me about the api he need for the actor review and rating. We decide to have a meeting on Thursday so we can finalize the detail of the coding and final report.
+During the meeting in the Thursday, most of the functionality is finished. I believe the all api required in the front-end is done. I will start working on the final report. 

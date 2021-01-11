@@ -1,0 +1,335 @@
+import { Component } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
+import { NgForm } from '@angular/forms';
+
+@Component({
+    templateUrl: './feed.component.html'
+})
+
+export class FeedComponent {
+
+    constructor(private http: HttpClient, private Activatedroute: ActivatedRoute, public auth: AuthenticationService, private router: Router) { }
+
+    loaded = false;
+
+    userDetails;
+
+    groupMembers = [];
+    groupPosts = [];
+    finalPosts = [];
+    initialPosts = [];
+
+    joinedGroups = [];
+
+    replyContent = '';
+
+    stars: number[] = [1, 2, 3, 4, 5];
+
+    ngOnInit() {
+
+        // We first need to get the details of this user.
+        this.auth.profile().subscribe(user => {
+            this.userDetails = user;
+
+            // Then we call an async helper function to
+            // retrieve all of the information for all
+            // groups the user has joined.
+            this.getUserGroupInfo();
+
+        });
+    }
+
+    // Helper function to retrieve all of the information
+    // for all groups a user has joined.
+    async getUserGroupInfo() {
+
+        // We loop through each group the user has joined.
+        for (let i in this.userDetails.groups) {
+
+            // Given we need all results before continuing,
+            // we await the result of the following requests.
+            await new Promise(resolve => {
+
+                let params = new HttpParams();
+                params = params.append('id', this.userDetails.groups[i]);
+
+                // given the id of the group, retrieve the group's details from the db
+                this.http.get(`/api/groupById`, { params: params }).subscribe((group: any) => {
+                    let currentGroup = group;
+
+                    // For each member, we also want to retrieve
+                    // their username so it can be displayed.
+                    for (let j in currentGroup.members) {
+                        let id = currentGroup.members[j];
+                        params = new HttpParams();
+                        params = params.append('u_id', id);
+                        this.http.get('/api/name', { params: params }).subscribe((name) => {
+                            this.groupMembers.push({
+                                "id": id,
+                                "name": name
+                            });
+                        });
+                    }
+
+                    // Next we retrieve all of the posts made
+                    // in this group.
+                    params = new HttpParams();
+                    params = params.append('group', currentGroup._id);
+                    this.http.get('/api/getPostsFromGroup', { params: params }).subscribe((posts: any) => {
+
+                        // For each post in the group, we add it
+                        // to the array of all posts in the group.
+                        for (let a in posts) {
+                            posts[a].groupName = group.name;
+                            this.initialPosts.push(posts[a]);
+                        }
+
+                        // Since we have all of the info for this group,
+                        // we can resolve the promise to continue execution.
+                        resolve();
+                    });
+                });
+            });
+        }
+
+        // At this point we have all of the posts from all
+        // groups the user has joined. So, we can sort
+        // all of these posts so the most recent post
+        // is displayed first.
+        this.initialPosts.sort(function (a, b) {
+            return a._id < b._id ? 1 : -1;
+        });
+
+        // Now we determine whether the current user has
+        // liked any of the posts.
+        for (let i in this.initialPosts) {
+            this.initialPosts[i].liked = 'Like';
+            if (this.initialPosts[i].reactList.includes(this.auth.getUserDetails()._id)) {
+                this.initialPosts[i].liked = 'Unlike';
+            }
+        }
+
+        let replies = [];
+
+        // For each post, we determine whether
+        // it is a parent post or a reply, and add it to the
+        // appropriate array. For parent posts
+        // we also get the author's name now.
+        let parentCounter = 0;
+        for (let i in this.initialPosts) {
+
+            if (this.initialPosts[i].reply_on == null) {
+                this.groupPosts.push(this.initialPosts[i]);
+                this.getPostAuthor(parentCounter);
+                parentCounter++;
+            } else {
+                replies.push(this.initialPosts[i]);
+            }
+        }
+
+        // Now for each parent post, we try and 
+        // find any replies.
+        for (let i in this.groupPosts) {
+
+            // While we're looping through the parent
+            // posts, we also check whether any are
+            // shared posts, and if so we need to 
+            // display some extra content.
+            if (this.groupPosts[i].share_type != null) {
+                this.showShareContent(i);
+            }
+
+            let replyCounter = 0;
+            for (let j in replies) {
+                if (this.groupPosts[i]._id == replies[j].reply_on) {
+                    if (this.groupPosts[i].replies == undefined) {
+                        this.groupPosts[i].replies = [];
+                    }
+                    this.groupPosts[i].replies.push(replies[j]);
+                    this.getPostReplyAuthor(i, replyCounter);
+                    replyCounter++;
+                }
+            }
+        }
+
+        // Finally we sort the replies for each parent post
+        // in reverse order, so the most recent reply is
+        // shown last.
+        for (let i in this.groupPosts) {
+            if (this.groupPosts[i].replies != undefined) {
+                this.groupPosts[i].replies = this.groupPosts[i].replies.slice().reverse();
+            }
+        }
+    }
+
+    // Visit the group details page for the group corresponding
+    // to a post in the feed.
+    visitGroup(groupName) {
+        this.router.navigate(['/groupPage'], { queryParams: { name: groupName } });
+    }
+
+    // If the post has shared content, we need to display this
+    showShareContent(index) {
+
+        // If it's a movie:
+        if (this.groupPosts[index].share_type == 'movie') {
+
+            let params = new HttpParams();
+            params = params.append('movieId', this.groupPosts[index].shared_content_movie);
+            params = params.append('u_id', this.auth.getUserDetails()._id);
+
+            this.http.get('/api/movieDetails', { params: params }).subscribe((movie: any) => {
+                this.groupPosts[index].moviePoster = movie.poster;
+                this.groupPosts[index].movieTitle = movie.title;
+                this.groupPosts[index].displayShare = 'movie';
+            });
+            // If it's a review
+        } else if (this.groupPosts[index].share_type == 'review') {
+
+            this.http.get(`/api/getActorReview/${this.groupPosts[index].shared_content_review}`).subscribe((review: any) => {
+
+                this.groupPosts[index].reviewType = 'actor';
+                this.groupPosts[index].reviewText = review.content;
+                this.groupPosts[index].reviewUserName = review.UserName;
+                this.groupPosts[index].reviewAuthor = review.author;
+                this.groupPosts[index].reviewActor = review.actor;
+                this.groupPosts[index].displayShare = 'review';
+
+                this.http.get(`/api/actors/${review.actor}`).subscribe((actor: any) => {
+                    this.groupPosts[index].reviewActorName = actor.name;
+                });
+
+                this.http.get(`/api/movies/${review.best_movie}`).subscribe((movie: any) => {
+                    this.groupPosts[index].movieTitle = movie.title;
+                    this.groupPosts[index].shared_content_movie = movie._id;
+                    this.groupPosts[index].moviePoster = movie.poster;
+                });
+            }, (err) => {
+                let params = new HttpParams();
+                params = params.append('reviewId', this.groupPosts[index].shared_content_review);
+
+                this.http.get('/api/getReviewById', { params: params }).subscribe((review: any) => {
+                    this.groupPosts[index].reviewType = 'movie';
+                    this.groupPosts[index].reviewText = review.content;
+                    this.groupPosts[index].reviewRating = review.rating;
+                    this.groupPosts[index].reviewUserName = review.UserName;
+                    this.groupPosts[index].reviewAuthor = review.author;
+                    this.groupPosts[index].displayShare = 'review';
+
+                    this.http.get(`/api/movies/${review.movies}`).subscribe((movie: any) => {
+                        this.groupPosts[index].movieTitle = movie.title;
+                        this.groupPosts[index].shared_content_movie = movie._id;
+                        this.groupPosts[index].moviePoster = movie.poster;
+                    });
+                });
+            });
+        } else if (this.groupPosts[index].share_type == 'actor') {
+
+            this.http.get(`/api/actors/${this.groupPosts[index].shared_content_actor}`).subscribe((actor: any) => {
+                this.groupPosts[index].actorName = actor.name;
+                this.groupPosts[index].actorRole = actor.job;
+                if (actor.job == 'director') {
+                    this.groupPosts[index].actorJob = 'Director';
+                    this.groupPosts[index].displayShare = 'director';
+                } else {
+                    this.groupPosts[index].actorJob = 'Cast Member';
+                    this.groupPosts[index].displayShare = 'cast member';
+                }
+            });
+        }
+    }
+
+    // Given a shared post, clicking the link should view the
+    // details page for this shared content.
+    visitShareItem(post) {
+
+        if (post.share_type == 'movie' || post.share_type == 'review') {
+            this.router.navigate(['/movieDetails'], { queryParams: { id: post.shared_content_movie, title: post.movieTitle } });
+        } else if (post.share_type == 'actor') {
+            this.router.navigate(['/directorCast'], { queryParams: { name: post.actorName, role: post.actorJob, title: post.actorRole } });
+        }
+    }
+
+    getPostAuthor(index) {
+        let params = new HttpParams();
+        params = params.append('u_id', this.groupPosts[index].author);
+        this.http.get('/api/name', { params: params }).subscribe((name) => {
+            this.groupPosts[index].authorName = name;
+        });
+    }
+
+    getPostReplyAuthor(parentIndex, replyIndex) {
+        let params = new HttpParams();
+        params = params.append('u_id', this.groupPosts[parentIndex].replies[replyIndex].author);
+        this.http.get('/api/name', { params: params }).subscribe((name) => {
+            this.groupPosts[parentIndex].replies[replyIndex].authorName = name;
+        });
+    }
+
+    // Called when the user clicks on the name of a user who left a review
+    getUser(author: string) {
+        // Go to the user's own profile page if this is their review
+        if (this.auth.isLoggedIn() && author == this.auth.getUserDetails()._id) {
+            this.router.navigateByUrl('/profile');
+            // Otherwise we go to a different user's profile page
+        } else {
+            this.router.navigate(['/wishlist'], { queryParams: { user: author } });
+        }
+
+    }
+
+    getName(id) {
+        let params = new HttpParams();
+        params = params.append('u_id', id);
+        this.http.get('/api/name', { params: params }).subscribe((name) => {
+            return name;
+        });
+    }
+
+    // Given a parent post and reply content, creates a reply to a post.
+    replyPost(post, form: NgForm) {
+
+        // First we check the user has entered something to reply.
+        if (form.value.replyContent != '') {
+
+            // We assign the parameters for the backend request.
+            let params = new HttpParams();
+            params = params.append('group', post.group);
+            params = params.append('author', this.auth.getUserDetails()._id);
+            params = params.append('text_content', form.value.replyContent);
+            params = params.append('reply_on', post._id);
+
+            // And create the reply.
+            this.http.get('/api/sendMessage', { params: params }).subscribe(() => {
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                    this.router.navigate(['/feed']);
+                });
+            });
+
+        }
+    }
+
+    // Given a post, we want to either like or unlike it.
+    likeUnlikePost(post) {
+
+        // We first make the backend API call to like or
+        // unlike the post.
+        let params = new HttpParams();
+        params = params.append('messageId', post._id);
+        params = params.append('userId', this.auth.getUserDetails()._id);
+        this.http.get('/api/reactMessage', { params: params }).subscribe((result: any) => {
+            // Given this result, we update the react list for this post.
+            post.reactList = result.reactList;
+        });
+
+        // If the user hasn't liked the post, then we like it.
+        if (post.liked == 'Like') {
+            post.liked = 'Unlike';
+            // Otherwise we unlike the post.
+        } else {
+            post.liked = 'Like';
+        }
+    }
+}
